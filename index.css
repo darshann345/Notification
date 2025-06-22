@@ -1,97 +1,101 @@
 * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f8f8f8;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  background-color: #f8f8f8;
+  padding: 20px;
 }
 
-.container {
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    padding: 20px;
-    width: 90%;
-    max-width: 600px;
-}
-.header{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
 }
 
 h1 {
-    margin-bottom: 20px;
-    font-size: 24px;
+  font-size: 24px;
 }
 
-button {
-    background-color: white;
-    color: black;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 4px;
-    cursor: pointer;
-    margin-bottom: 20px;
+.notifications-counter {
+  background-color: hsl(219, 85%, 26%);
+  color: white;
+  padding: 4px 10px;
+  border-radius: 5px;
+  font-size: 14px;
+  margin-left: 10px;
 }
 
-button:hover {
-    background-color: #0056b3;
+.mark-all-button {
+  background-color: white;
+  border: 1px solid #ccc;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
 }
 
 .notification {
-    display: flex;
-    align-items: center;
-    border-bottom: 1px solid #eaeaea;
-    padding: 10px 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 16px;
+  background-color: white;
+  border: 1px solid #eee;
+  border-radius: 6px;
+  margin-bottom: 10px;
 }
 
-.notification:last-child {
-    border-bottom: none;
+.notification.new-notification {
+  background-color: hsl(210, 60%, 98%);
 }
 
 .notification img {
-    border-radius: 50%;
-    width: 50px;
-    height: 50px;
-    margin-right: 10px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
 }
 
-.notification-content {
-    flex-grow: 1;
+.notification-infos {
+  flex: 1;
 }
 
-.notification-content .notification-text {
-    color: #333;
+.notification-text {
+  margin-bottom: 4px;
 }
 
-.notification-content .notification-time {
-    font-size: 12px;
-    color: #aaa;
+.notification-text-private-message {
+  display: none;
+  margin-top: 8px;
+  font-size: 14px;
+  background-color: #f0f0f0;
+  padding: 10px;
+  border-radius: 4px;
+  color: #444;
 }
-/* CSS for notifications */
+
 .notification-dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    display: inline-block;
-    background-color: red;
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  background-color: red;
+  border-radius: 50%;
+  margin-left: 6px;
 }
 
+a.profile-link,
+a.notification-link-post {
+  font-weight: bold;
+  color: hsl(219, 85%, 26%);
+  text-decoration: none;
+}
 
-@media (max-width: 600px) {
-    h1 {
-        font-size: 20px;
-    }
-
-    button {
-        width: 100%;
-    }
+footer {
+  margin-top: 40px;
+  text-align: center;
+  color: #777;
+  font-size: 14px;
 }

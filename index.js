@@ -1,141 +1,129 @@
-
 document.addEventListener("DOMContentLoaded", function () {
   const data = [
     {
       img: "./assets/images/avatar-mark-webber.png",
-      info: {
-        name: "Mark Webber",
-        action: "reacted to your recent post",
-        postName: "My first tournament today!",
-        time: "1m ago",
-        privateMessage: "",
-        picture: "",
-      },
+      name: "Mark Webber",
+      action: "reacted to your recent post",
+      postName: "My first tournament today!",
+      time: "1m ago",
+      privateMessage: "",
+      isNew: true
     },
     {
       img: "./assets/images/avatar-angela-gray.png",
-      info: {
-        name: "Angela Gray",
-        action: "followed you",
-        postName: "",
-        time: "5m ago",
-        privateMessage: "",
-        picture: "",
-      },
+      name: "Angela Gray",
+      action: "followed you",
+      postName: "",
+      time: "5m ago",
+      privateMessage: "",
+      isNew: true
     },
     {
       img: "./assets/images/avatar-jacob-thompson.png",
-      info: {
-        name: "Jacob Thompson",
-        action: "has joined your group",
-        postName: "Chess Club",
-        time: "1 day ago",
-        privateMessage: "",
-        picture: "",
-      },
+      name: "Jacob Thompson",
+      action: "has joined your group",
+      postName: "Chess Club",
+      time: "1 day ago",
+      privateMessage: "",
+      isNew: true
     },
     {
       img: "./assets/images/avatar-rizky-hasanuddin.png",
-      info: {
-        name: "Rizky Hasanuddin",
-        action: "sent you a private message",
-        postName: "",
-        time: "5 days ago",
-        privateMessage:
-          "Hello, thanks for setting up the Chess Club. I've been a member for a few weeks now and I'm already having lots of fun and improving my game.",
-        picture: "",
-      },
+      name: "Rizky Hasanuddin",
+      action: "sent you a private message",
+      postName: "",
+      time: "5 days ago",
+      privateMessage:
+        "Hello, thanks for setting up the Chess Club. I've been a member for a few weeks now and I'm already having lots of fun and improving my game.",
+      isNew: false
     },
     {
       img: "./assets/images/avatar-kimberly-smith.png",
-      info: {
-        name: "Kimberly Smith",
-        action: "commented on your picture",
-        postName: "",
-        time: "1 week ago",
-        privateMessage: "",
-        picture: "./assets/images/image-chess.png",
-      },
+      name: "Kimberly Smith",
+      action: "commented on your picture",
+      postName: "",
+      time: "1 week ago",
+      privateMessage: "",
+      isNew: false
     },
     {
       img: "./assets/images/avatar-nathan-peterson.png",
-      info: {
-        name: "Nathan Peterson",
-        action: "reacted to your recent post",
-        postName: "5 end-game strategies to increase your win rate",
-        time: "2 weeks ago",
-        privateMessage: "",
-        picture: "",
-      },
+      name: "Nathan Peterson",
+      action: "reacted to your recent post",
+      postName: "5 end-game strategies to increase your win rate",
+      time: "2 weeks ago",
+      privateMessage: "",
+      isNew: false
     },
     {
       img: "./assets/images/avatar-anna-kim.png",
-      info: {
-        name: "Anna Kim",
-        action: "left the group",
-        postName: "Chess Club",
-        time: "2 weeks ago",
-        privateMessage: "",
-        picture: "",
-      },
-    },
+      name: "Anna Kim",
+      action: "left the group",
+      postName: "Chess Club",
+      time: "2 weeks ago",
+      privateMessage: "",
+      isNew: false
+    }
   ];
 
-const notificationList = document.getElementById("notification-list");
+  const list = document.getElementById("list");
+  const counter = document.querySelector(".notifications-counter");
 
-  data.forEach((item) => {
-    const { img, info } = item;
-    const {
-      name,
-      action,
-      postName,
-      time,
-      privateMessage,
-      picture,
-    } = info;
+  const renderNotifications = () => {
+    list.innerHTML = "";
+    let newCount = 0;
 
-    // Create container div
-    const wrapper = document.createElement("div");
-    wrapper.classList.add("notification-wrapper");
-
-    const notificationHTML = `
-      <div class="notification">
-        <img src="${img}" alt="${name}" class="avatar" />
-        <div class="notification-content">
+    data.forEach((item, idx) => {
+      const li = document.createElement("li");
+      li.className = "notification" + (item.isNew ? " new-notification" : "");
+      li.innerHTML = `
+        <img src="${item.img}" alt="${item.name}" />
+        <div class="notification-infos">
           <div class="notification-text">
-            <strong>${name}</strong> ${action}
-            ${postName ? `<strong class="highlight"> ${postName}</strong>` : ""}
-            <span class="notification-dot" style="margin-left: 8px; cursor: ${privateMessage ? "pointer" : "default"};"></span>
+            <a href="#" class="profile-link">${item.name}</a> ${item.action}
+            ${
+              item.postName
+                ? `<a href="#" class="notification-link-post"> ${item.postName}</a>`
+                : ""
+            }
+            ${
+              item.isNew
+                ? `<span class="notification-dot"></span>`
+                : ""
+            }
           </div>
-          <div class="notification-time">${time}</div>
+          <div class="notification-time">${item.time}</div>
+          ${
+            item.privateMessage
+              ? `<div class="notification-text-private-message">${item.privateMessage}</div>`
+              : ""
+          }
         </div>
-        ${picture ? `<img src="${picture}" alt="Attached preview" class="preview-image" />` : ""}
-      </div>
-      ${
-        privateMessage
-          ? `<div class="private-message-container" style="display: none; padding-left: 60px; margin-top: 8px; color: #444;">
-              <em>${privateMessage}</em>
-            </div>`
-          : ""
+      `;
+
+      if (item.privateMessage) {
+        li.addEventListener("click", () => {
+          const msg = li.querySelector(".notification-text-private-message");
+          msg.style.display =
+            msg.style.display === "block" ? "none" : "block";
+        });
       }
-    `;
 
-    wrapper.innerHTML = notificationHTML;
-    notificationList.appendChild(wrapper);
+      list.appendChild(li);
+      if (item.isNew) newCount++;
+    });
 
-    // Toggle message visibility
-    if (privateMessage) {
-      const dot = wrapper.querySelector(".notification-dot");
-      const privateMsgBox = wrapper.querySelector(".private-message-container");
-      dot.addEventListener("click", () => {
-        privateMsgBox.style.display =
-          privateMsgBox.style.display === "none" ? "block" : "none";
+    counter.textContent = newCount;
+  };
+
+  renderNotifications();
+
+  document
+    .getElementById("mark-all-read")
+    .addEventListener("click", () => {
+      data.forEach((item) => {
+        item.isNew = false;
       });
-    }
-  });
-
-  document.getElementById("mark-all-read").addEventListener("click", () => {
-    alert("All notifications marked as read!");
-    document.querySelectorAll(".notification-dot").forEach(dot => dot.style.display = "none");
-  });
+      renderNotifications();
+    });
 });

@@ -1,26 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="index.css">
-    <title>Notification Page</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="index.css" />
+  <title>Notification Page</title>
 </head>
-
 <body>
-    <div class="container">
-        <div class = "header">
-            <h1>Notifications</h1>
-        <button id="mark-all-read">Mark all as read</button>
-        </div>
-        
-        <div class="notification-list" id="notification-list">
+  <header>
+    <h1>Notifications <span class="notifications-counter">3</span></h1>
+    <button class="mark-all-button" id="mark-all-read">Mark all as read</button>
+  </header>
 
-        </div>
-    </div>
-    <script src="index.js"></script>
+  <main>
+    <ul id="list"></ul>
+  </main>
 
+  <footer>
+    <p>&copy; 2025 Notification Center</p>
+  </footer>
+
+  <script src="index.js"></script>
 </body>
-
 </html>
