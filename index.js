@@ -86,16 +86,14 @@ document.addEventListener("DOMContentLoaded", function () {
                 ? `<a href="#" class="notification-link-post"> ${item.postName}</a>`
                 : ""
             }
-            ${
-              item.isNew
-                ? `<span class="notification-dot"></span>`
-                : ""
-            }
+            <span class="notification-dot" style="display: ${
+              item.isNew ? "inline-block" : "none"
+            };"></span>
           </div>
           <div class="notification-time">${item.time}</div>
           ${
             item.privateMessage
-              ? `<div class="notification-text-private-message">${item.privateMessage}</div>`
+              ? `<div class="notification-text-private-message" style="display: none;">${item.privateMessage}</div>`
               : ""
           }
         </div>
@@ -124,6 +122,17 @@ document.addEventListener("DOMContentLoaded", function () {
       data.forEach((item) => {
         item.isNew = false;
       });
+
       renderNotifications();
+
+      document.querySelectorAll(".notification-dot").forEach(dot => {
+        dot.style.display = "none";
+      });
+
+      document.querySelectorAll(".notification").forEach(notification => {
+        notification.classList.remove("new-notification");
+      });
+
+      counter.textContent = "0";
     });
 });
